@@ -7668,6 +7668,15 @@ this.setTextContent = function(val) {
   textActions.setCursor();
 };
 
+// Function: setTextAnchor
+// Updates the text anchor with the given string
+//
+// Parameters:
+// val - String with the new text anchor
+this.setTextAnchor = function(val) {
+  changeSelectedAttribute("text-anchor", val);
+}
+
 // Function: setImageURL
 // Sets the new image URL for the selected image element. Updates its size if
 // a new URL is given

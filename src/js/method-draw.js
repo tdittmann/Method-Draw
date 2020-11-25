@@ -810,6 +810,11 @@ window.methodDraw = function() {
     $('#font_family').change(function() {
       svgCanvas.setFontFamily(this.value);
     });
+
+    $('#text_anchor').change(function() {
+      svgCanvas.setTextAnchor(this.value);
+      $("#text_anchor_label").html(this.options[this.selectedIndex].text)
+    });
       
     $('#text').keyup(function(){
       svgCanvas.setTextContent(this.value);
