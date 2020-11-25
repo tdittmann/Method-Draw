@@ -2644,7 +2644,9 @@ var getMouseTarget = this.getMouseTarget = function(evt) {
             "font-family": cur_text.font_family,
             "text-anchor": "start",
             "xml:space": "preserve",
-            "opacity": cur_shape.opacity
+            "opacity": cur_shape.opacity,
+            "fill-opacity": 1,
+            "stroke-opacity": 1
           }
         });
 //          newText.textContent = "text";
