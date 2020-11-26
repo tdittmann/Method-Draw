@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/fonts.css" type="text/css"/>
   <link rel="stylesheet" href="css/dropdown.css" type="text/css"/>
   <link rel="stylesheet" href="css/draginput.css" type="text/css"/>
+  <link rel="stylesheet" href="css/textinput.css" type="text/css"/>
   <link rel="stylesheet" href="css/menu.css" type="text/css"/>
   <link rel="stylesheet" href="css/rulers.css" type="text/css"/>
   <link rel="stylesheet" href="css/palette.css" type="text/css"/>
@@ -64,10 +65,10 @@
       <div id="tool_about" class="menu_item">Keyboard Shortcuts...</div>
     </div>
   </a>
-  
+
   <div class="menu">
     <div class="menu_title">File</div>
-    <div class="menu_list" id="file_menu"> 
+    <div class="menu_list" id="file_menu">
       <div id="tool_clear" class="menu_item">New Document</div>
       <div id="tool_open" class="menu_item" style="display: none;"><div id="fileinputs"></div>Open SVG...</div>
       <div id="tool_import" class="menu_item" style="display: none;"><div id="fileinputs_import"></div>Import Image...</div>
@@ -89,7 +90,7 @@
       <div class="menu_item action_selected disabled" id="tool_delete">Delete <span>⌫</span></div>
     </div>
   </div>
-  
+
   <div class="menu">
     <div class="menu_title">Object</div>
     <div class="menu_list"  id="object_menu">
@@ -116,17 +117,38 @@
         <div class="menu_item" id="tool_source">Source... <span class="shortcut">⌘U</span></div>
     </div>
   </div>
-  
 
-  
+
+
 </div>
 
 <div id="tools_top" class="tools_panel">
 
+  <div id="object_panel" class="context_panel">
+    <h4>Object</h4>
+
+    <div class="textinput">
+      <div id="object_id_edit" class="edit">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10pt" height="10pt" viewBox="0 0 24 24" version="1.1">
+          <path style=" stroke:none;fill-rule:nonzero;fill:rgb(80.000001%,80.000001%,80.000001%);fill-opacity:1;" d="M 16.9375 1.0625 L 3.875 14.125 L 1.074219 22.925781 L 9.875 20.125 L 22.9375 7.0625 C 22.9375 7.0625 22.835938 4.960938 20.9375 3.0625 C 19.039062 1.164062 16.9375 1.0625 16.9375 1.0625 Z M 17.3125 2.6875 C 18.382812 2.890625 19.238281 3.34375 19.894531 4.023438 C 20.554688 4.699219 21.019531 5.59375 21.3125 6.6875 L 19.5 8.5 L 15.5 4.5 Z M 4.976562 15.125 C 4.992188 15.128906 6.179688 15.429688 7.375 16.625 C 8.675781 17.824219 8.875 18.925781 8.875 18.925781 L 8.917969 18.976562 L 5.367188 20.117188 L 3.871094 18.621094 Z M 4.976562 15.125 "/>
+        </svg>
+      </div>
+      <label>
+        <span>ID</span>
+        <input id="object_id" class="attr_changer form-control" data-title="Change ID" data-attr="id" disabled/>
+        <div id="object_id_action_button" class="action_buttons">
+          <button id="object_id_save" class="button_save">Save</button>
+          <button id="object_id_cancel" class="button_cancel">Cancel</button>
+        </div>
+      </label>
+    </div>
+
+  </div>
+
   <div id="canvas_panel" class="context_panel">
-    
+
     <h4 class="clearfix">Canvas</h4>
-    
+
     <label data-title="Change canvas width">
       <input size="3" id="canvas_width" type="text" pattern="[0-9]*" />
       <span class="icon_label">Width</span>
@@ -135,8 +157,8 @@
       <input id="canvas_height" size="3" type="text" pattern="[0-9]*" />
       <span class="icon_label">Height</span>
     </label>
-        
-    
+
+
     <label data-title="Change canvas color" class="draginput">
       <span>Color</span>
       <div id="color_canvas_tools">
@@ -165,16 +187,16 @@
     </div>
 
   </div>
-  
+
   <div id="rect_panel" class="context_panel">
     <h4 class="clearfix">Rectangle</h4>
     <label>
       <input id="rect_x" class="attr_changer" data-title="Change X coordinate" size="3" data-attr="x" pattern="[0-9]*" />
-      <span>X</span> 
+      <span>X</span>
     </label>
     <label>
       <input id="rect_y" class="attr_changer" data-title="Change Y coordinate" size="3" data-attr="y" pattern="[0-9]*" />
-      <span>Y</span> 
+      <span>Y</span>
     </label>
     <label id="rect_width_tool attr_changer" data-title="Change rectangle width">
       <input id="rect_width" class="attr_changer" size="3" data-attr="width" type="text" pattern="[0-9]*" />
@@ -185,7 +207,7 @@
       <span class="icon_label">Height</span>
     </label>
   </div>
-  
+
   <div id="path_panel" class="context_panel clearfix">
     <h4 class="clearfix">Path</h4>
     <label>
@@ -202,11 +224,11 @@
   <h4>Image</h4>
     <label>
       <input id="image_x" class="attr_changer" data-title="Change X coordinate" size="3" data-attr="x"  pattern="[0-9]*"/>
-      <span>X</span> 
+      <span>X</span>
     </label>
     <label>
       <input id="image_y" class="attr_changer" data-title="Change Y coordinate" size="3" data-attr="y"  pattern="[0-9]*"/>
-      <span>Y</span> 
+      <span>Y</span>
     </label>
     <label>
       <input id="image_width" class="attr_changer" data-title="Change image width" size="3" data-attr="width" pattern="[0-9]*" />
@@ -217,7 +239,7 @@
       <span class="icon_label">Height</span>
     </label>
   </div>
-  
+
   <div id="circle_panel" class="context_panel">
     <h4>Circle</h4>
     <label id="tool_circle_cx">
@@ -284,7 +306,7 @@
       <input id="text_y" class="attr_changer" data-title="Change text y coordinate" size="3" data-attr="y" pattern="[0-9]*" />
       <span>Y</span>
     </label>
-    
+
     <div class="toolset draginput select twocol" id="tool_font_family">
         <!-- Font family -->
       <span>Font</span>
@@ -333,11 +355,11 @@
   <!-- formerly gsvg_panel -->
   <div id="container_panel" class="context_panel clearfix">
   </div>
-  
+
   <div id="use_panel" class="context_panel clearfix">
     <div class="tool_button clearfix" id="tool_unlink_use" data-title="Break link to reference element (make unique)">Break link reference</div>
   </div>
-  
+
   <div id="g_panel" class="context_panel clearfix">
     <h4>Group</h4>
     <label>
@@ -349,7 +371,7 @@
       <span>Y</span>
     </label>
   </div>
-  
+
   <div id="path_node_panel" class="context_panel clearfix">
     <h4>Edit Path</h4>
 
@@ -361,7 +383,7 @@
       <input id="path_node_y" class="attr_changer" data-title="Change node's y coordinate" size="3" data-attr="y" />
       <span>Y</span>
     </label>
-    
+
     <div id="segment_type" class="draginput label">
       <span>Segment Type</span>
       <select id="seg_type" data-title="Change Segment type">
@@ -371,21 +393,21 @@
       <div class="caret"></div>
       <label id="seg_type_label">Straight</label>
     </div>
-    
+
     <!--
     <label class="draginput checkbox" data-title="Link Control Points">
       <span>Linked Control Points</span>
       <div class="push_bottom"><input type="checkbox" id="tool_node_link" checked="checked" /></div>
     </label>
   -->
-    
+
     <div class="clearfix"></div>
     <div class="tool_button" id="tool_node_clone" title="Adds a node">Add Node</div>
     <div class="tool_button" id="tool_node_delete" title="Delete Node">Delete Node</div>
     <div class="tool_button" id="tool_openclose_path" title="Open/close sub-path">Open Path</div>
     <!--<div class="tool_button" id="tool_add_subpath" title="Add sub-path"></div>-->
   </div>
-  
+
   <!-- Buttons when a single element is selected -->
   <div id="selected_panel" class="context_panel">
 
@@ -396,24 +418,24 @@
         <div id="tool_angle_indicator_cursor"></div>
       </div>
     </label>
-    
+
       <label class="toolset" id="tool_opacity" data-title="Change selected item opacity">
         <input id="group_opacity" class="attr_changer" data-attr="opacity" data-multiplier="0.01" size="3" value="100" step="5" min="0" max="100" />
         <span id="group_opacityLabel" class="icon_label">Opacity</span>
       </label>
-    
+
     <div class="toolset" id="tool_blur" data-title="Change gaussian blur value">
       <label>
         <input id="blur" size="2" value="0" step=".1"  min="0" max="10" />
         <span class="icon_label">Blur</span>
       </label>
     </div>
-    
+
     <label id="cornerRadiusLabel" data-title="Change Rectangle Corner Radius">
       <input id="rect_rx" size="3" value="0" data-attr="rx" class="attr_changer" type="text" pattern="[0-9]*" />
       <span class="icon_label">Roundness</span>
     </label>
-    
+
     <div class="clearfix"></div>
     <div id="align_tools">
       <h4>Align</h4>
@@ -452,16 +474,16 @@
               </div>
             </div>
           </label>
-      </div>    
+      </div>
     </div>
   </div>
-  
+
   <!-- Buttons when multiple elements are selected -->
   <div id="multiselected_panel" class="context_panel clearfix">
     <h4 class="hidable">Multiple Elements</h4>
-    
+
     <div class="toolset align_buttons" style="position: relative">
-      <label id="tool_align_relative" style="margin-top: 10px;"> 
+      <label id="tool_align_relative" style="margin-top: 10px;">
         <select id="align_relative_to" title="Align relative to ...">
         <option id="selected_objects" value="selected">Align to objects</option>
         <option id="page" value="page">Align to page</option>
@@ -504,7 +526,7 @@
     <div class="clearfix"></div>
 
   </div>
-  
+
   <div id="stroke_panel" class="context_panel clearfix">
     <div class="clearfix"></div>
     <h4>Stroke</h4>
@@ -514,7 +536,7 @@
         <span class="icon_label">Stroke Width</span>
       </label>
     </div>
-    <div class="stroke_tool draginput"> 
+    <div class="stroke_tool draginput">
       <span>Stroke Dash</span>
       <select id="stroke_style" data-title="Change stroke dash style">
         <option selected="selected" value="none">—</option>
@@ -526,11 +548,11 @@
       <div class="caret"></div>
       <label id="stroke_style_label">—</label>
     </div>
-    
+
     <label style="display: none;">
       <span class="icon_label">Stroke Join</span>
     </label>
-    
+
     <label  style="display: none;">
       <span class="icon_label">Stroke Cap</span>
     </label>
@@ -538,7 +560,7 @@
 
 </div> <!-- tools_top -->
   <div id="cur_context_panel">
-    
+
   </div>
 
 
@@ -572,7 +594,7 @@
       <polygon points="14.43,10 12,2 9.57,10 2,10 8.18,14.41 5.83,22 12,17.31 18.18,22 15.83,14.41 22,10"/>
     </svg>
     <div class="tool_menu">
-      
+
     </div>
 </div>
 
@@ -592,7 +614,7 @@
   <div class="tool_button" id="tool_eyedropper" title="Eyedropper Tool [Z]">
     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="2 2 20 20" width="27" style="transform: scale(-1, 1)"><path d="M20.71 5.63l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-3.12 3.12-1.93-1.91-1.41 1.41 1.42 1.42L3 16.25V21h4.75l8.92-8.92 1.42 1.42 1.41-1.41-1.92-1.92 3.12-3.12c.4-.4.4-1.03.01-1.42zM6.92 19L5 17.08l8.06-8.06 1.92 1.92L6.92 19z"/></svg>
   </div>
-  
+
   <div id="color_tools">
         <div id="tool_switch" title="Switch stroke and fill colors [X]"></div>
         <div class="color_tool active" id="tool_fill">
@@ -641,7 +663,7 @@
       <input id="zoom" size="3" value="100%" type="text" readonly="readonly" />
     </div>
   </div>
-  
+
   <div id="palette" title="Click to change fill color, shift-click to change stroke color"></div>
 </div>
 

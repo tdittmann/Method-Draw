@@ -161,6 +161,7 @@ window.methodDraw = function() {
         $('.context_panel').hide()
         $('#tools_top').removeClass('multiselected')
         $('#multiselected_panel').show()
+        $('object_panel').hide();
       }
       else {
         $('.context_panel').hide()
@@ -404,10 +405,12 @@ window.methodDraw = function() {
         case 'use':
           $(".context_panel").hide();
           $("#use_panel").show();
+          $("#object_panel").show();
           break;
         case 'image':
           $(".context_panel").hide();
           $("#image_panel").show();
+          $("#object_panel").show();
           break;
         case 'foreignObject':
           $(".context_panel").hide();
@@ -528,8 +531,17 @@ window.methodDraw = function() {
       }
 
       if (elem != null) {
+        $("#object_panel").show();
         $("#stroke_panel").show();
         var elname = elem.nodeName;
+
+        // Update object id
+        var id = svgCanvas.getElementId(elem);
+        $("#object_id").val(id);
+        $('#object_id').prop('disabled', true);
+        $('#object_id_action_button').hide();
+        $('#object_id_edit').show();
+
         var angle = svgCanvas.getRotationAngle(elem);
         $('#angle').val(Math.round(angle));
 
@@ -673,6 +685,7 @@ window.methodDraw = function() {
 
       if (multiselected) {
         $('#multiselected_panel').show();
+        $('#object_panel').hide();
         $('.action_multi_selected').removeClass('disabled');
         menu_items
           .enableContextMenuItems('#group')
@@ -2257,6 +2270,66 @@ window.methodDraw = function() {
     $('#blur')         .dragInput({ min: 0,    max: 10,    step: .1,  callback: changeBlur,          cursor: true,  start: 0               });
       // Set default zoom
     $('#zoom').val(svgCanvas.getZoom() * 100);
+
+    // Object ID
+    var updateObjectId = function() {
+      var newId = $('#object_id').val();
+      var oldId = selectedElement.getAttribute('id');
+
+      if(!newId) {
+        // New id should not be empty
+        $.alert("Empty id is not allowed");
+        $('#object_id').val(oldId)
+            .focus();
+        return;
+      } else if (oldId === newId) {
+        // Old and new id are the same --> nothing to do
+        $('#object_id').prop('disabled', true);
+        $('#object_id_action_button').hide();
+        $('#object_id_edit').show();
+        return;
+      } else if($('#svgcanvas #' + newId).length !== 0) {
+        // ID is already present
+        $('#object_id').focus();
+        $.alert("ID already present!");
+        return;
+      }
+
+      // We need to clear the selection and update the context panel, otherwise we got a blue standing border :/
+      svgCanvas.clearSelection(true);
+      selectedElement = null;
+      updateContextPanel();
+
+      // Change id of the element
+      $('#' + oldId).attr('id', newId);
+      svgCanvas.changeSelectedAttribute()
+      svgCanvas.addToSelection($('#' + newId));
+
+      $('#object_id').prop('disabled', true);
+      $('#object_id_action_button').hide();
+      $('#object_id_edit').show();
+    }
+    $('#object_id_edit').bind('click', function() {
+      $('#object_id_edit').hide();
+      $('#object_id_action_button').css('display', 'flex');
+      $('#object_id').prop('disabled', false)
+          .focus();
+    });
+
+    $('#object_id').on('keypress', function(e) {
+      if(e.which === 13) {
+        updateObjectId();
+      }
+    })
+    $('#object_id_save').bind('click', function(){
+      updateObjectId();
+    });
+    $('#object_id_cancel').bind('click', function(){
+      $('#object_id').val(selectedElement.getAttribute('id'))
+          .prop('disabled', true);
+      $('#object_id_action_button').hide();
+      $('#object_id_edit').show();
+    });
 
     $("#workarea").contextMenu({
         menu: 'cmenu_canvas',

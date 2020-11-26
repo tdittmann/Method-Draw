@@ -324,6 +324,12 @@ svgedit.utilities.setHref = function(elem, val) {
   elem.setAttributeNS(XLINKNS, "xlink:href", val);
 }
 
+// Function: svgedit.utilities.getElementId
+// Returns the given element's id
+svgedit.utilities.getElementId = function(elem) {
+  if (elem) return elem.getAttribute('id');
+}
+
 // Function: findDefs
 // Parameters:
 // svgElement - The <svg> element.

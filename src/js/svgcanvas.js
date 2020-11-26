@@ -297,6 +297,7 @@ var getHref = canvas.getHref = svgedit.utilities.getHref;
 var setHref = canvas.setHref = svgedit.utilities.setHref;
 var getPathBBox = svgedit.utilities.getPathBBox;
 var getBBox = canvas.getBBox = svgedit.utilities.getBBox;
+var getElementId = canvas.getElementId = svgedit.utilities.getElementId;
 var getRotationAngle = canvas.getRotationAngle = svgedit.utilities.getRotationAngle;
 var getElem = canvas.getElem = svgedit.utilities.getElem;
 var assignAttributes = canvas.assignAttributes = svgedit.utilities.assignAttributes;
